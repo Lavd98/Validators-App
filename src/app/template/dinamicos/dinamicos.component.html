@@ -1,0 +1,56 @@
+<h2>Template: <small>Dinamicos</small></h2>
+<hr>
+
+<form (ngSubmit)="guardar()" #formDinamico="ngForm" autocomplete="off">
+
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Nombre</label>
+        <div class="col-sm-9">
+            <input type="text" class="form-control" placeholder="Nombre" [ngModel]="persona.nombre" name="nombre" required>
+            <span class="form-text text-danger" *ngIf="formDinamico.controls['nombre']?.errors && formDinamico.controls['nombre']?.touched">
+                Este campo es obligatorio
+            </span>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Agregar</label>
+        <div class="col-sm-9">
+            <div class="input-group">
+                <input type="text" 
+                class="form-control" 
+                placeholder="Agregar favorito"
+                (keyup.enter)="agregar()" 
+                [(ngModel)]="nuevoJuego" 
+                name="nuevoJuego">
+                <button type="button" class="btn btn-outline-primary" (click)="agregar()">Agregar</button>
+            </div>    
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Favoritos</label>
+        <div class="col-sm-9">
+            <div class="input-group mb-1" *ngFor="let p of persona.favorito; let i = index">
+                <input type="text" 
+            class="form-control" 
+             
+            [(ngModel)]="p.nombre" 
+            name="favorito_{{i}}" 
+            required>
+            <button type="button" class="btn btn-outline-danger" (click)="eliminar(i)">Eliminar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <button type="button" class="btn btn-primary float-end" (click)="guardar()" [disabled]="formDinamico.invalid">Guardar</button>
+        </div>
+    </div>
+
+</form>
+
+<span>Persona</span>
+
+<pre>{{persona | json}}</pre>

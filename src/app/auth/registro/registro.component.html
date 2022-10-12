@@ -1,0 +1,78 @@
+<h2>Validaciones Reactivas</h2>
+<hr>
+
+<div class="row">
+    <div class="col">
+
+        <form autocomplete="off" [formGroup]="formReg" (ngSubmit)="submitForm()">
+
+            <div class="row mb-3">
+                <label for="" class="col-sm-3 col-form-label">Nombre</label>
+                <div class="col-9">
+                    <input type="text" class="form-control" placeholder="Nombre del usuario" formControlName="nombre">
+                    <span class="form-text text-danger" *ngIf="campoNoValido('nombre')">
+                        Debe de ser en formato de nombre y apellido
+                    </span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Email</label>
+                <div class="col-9">
+                    <input type="email" class="form-control" placeholder="Email del usuario" formControlName="email">
+                    <span class="form-text text-danger" *ngIf="campoNoValido('email')">
+                        {{emailErrorMsg}}
+                    </span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Username</label>
+                <div class="col-9">
+                    <input type="text" class="form-control" placeholder="Codigo del usuario" formControlName="username">
+                    <span class="form-text text-danger" *ngIf="campoNoValido('username')">
+                        El user no debe ser Lavd
+                    </span>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Password</label>
+                <div class="col-9">
+                    <input type="password" class="form-control" placeholder="Password de la cuenta" formControlName="password">
+                    <span class="form-text text-danger" *ngIf="campoNoValido('password')">
+                        El password debe ser mayor a 6 caracteres
+                    </span>
+                </div>
+            </div>
+
+            
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Confirmar</label>
+                <div class="col-9">
+                    <input type="password" class="form-control" placeholder="Confirmar la contrasenia" formControlName="password2">
+                    <span class="form-text text-danger" *ngIf="campoNoValido('password2')">
+                        Las contrasenias deben ser iguales
+                    </span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <button type="submit" class="btn btn-primary float-end" [disabled]="formReg.pending">Crear</button>
+                </div>
+            </div>
+
+
+
+        </form>
+
+    </div>
+</div>
+
+<h2>Form Valid: {{formReg.valid}}</h2>
+<h2>Form Status: {{formReg.status}}</h2>
+<h2>Form Errors: {{formReg.errors}}</h2>
+
+<h5>Nombre</h5>
+<pre>{{formReg.controls['nombre'].errors | json}}</pre>

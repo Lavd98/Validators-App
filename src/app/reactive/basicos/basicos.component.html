@@ -1,0 +1,69 @@
+<h2>Reactivos: Basicos</h2>
+<hr>
+
+<div class="row">
+    <div class="col">
+
+        <form autocomplete="off" [formGroup]="formBasico" (ngSubmit)="guardar()">
+
+            <div class="mb-3 row">
+                <label for="" class="col-sm-3 col-form-label">Producto</label>
+                <div class="col-sm-9">
+                    <input type="text" 
+                    class="form-control" 
+                    formControlName="nombre"
+                    placeholder="Nombre del producto">
+
+                    <span class="form-text text-danger" *ngIf="campoValido('nombre')">
+                        Debe de ser de 3 letras
+                    </span>
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label for="" class="col-sm-3 col-form-label">Precio</label>
+                <div class="col-sm-9">
+                    <input type="number" class="form-control" placeholder="Precio del producto" formControlName="precio">
+                    <span class="form-text text-danger" *ngIf="campoValido('precio')">
+                    Debe de ser de 0 o mayor
+                </span>
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label for="" class="col-sm-3 col-form-label">Stock</label>
+                <div class="col-sm-9">
+                    <input type="number" class="form-control" placeholder="Stock" formControlName="stock">
+                    <span class="form-text text-danger" *ngIf="campoValido('stock')">
+                        Debe de ser de 0 o mayor
+                    </span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <button type="submit" class="btn btn-primary float-end">Guardar</button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+
+        <span>Valid</span>
+        <pre>{{ formBasico.valid| json }}</pre>
+
+        <span>Pristine</span>
+        <pre>{{ formBasico.pristine| json }}</pre>
+
+        <span>Touched</span>
+        <pre>{{ formBasico.touched| json }}</pre>
+
+        <span>Value</span>
+        <pre>{{ formBasico.value | json }}</pre>
+    </div>
+</div>
